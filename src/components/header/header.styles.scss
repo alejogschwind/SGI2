@@ -1,0 +1,34 @@
+.header {
+  height: 200px;
+  width: 100vw;
+  background-color: #D81B5D;
+  padding: 0 5vw;
+  margin-bottom: -80px;
+  display: flex;
+  justify-content: space-between;
+
+  .top-header {
+    height: 80px;
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    .display-name {
+      color: white;
+      font-weight: 500;
+    }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      border-radius: 50%;
+      background: white;
+    }
+  }
+}
