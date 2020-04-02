@@ -38,8 +38,8 @@ class CardList extends React.Component {
     return (
       <div className="card-list">
         {
-          this.state.events.map( ({title, imageURL, id}) => (
-            <CardItem key={id} title={title} imageURL={imageURL}/>
+          this.state.events.map( (event) => (
+            <CardItem key={event.id} event={event}/>
           ))
         }
       </div>
