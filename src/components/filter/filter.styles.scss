@@ -1,0 +1,17 @@
+.filter {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  
+  .filter-item {
+    display: flex;
+    margin: 0 10px;
+  
+    .lable {
+      margin: 0 10px;
+      color: white;
+      font-weight: bolder;
+      font-size: 14;
+    }
+  }
+}

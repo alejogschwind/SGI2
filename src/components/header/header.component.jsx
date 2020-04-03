@@ -2,7 +2,7 @@ import React from 'react';
 
 import './header.styles.scss';
 
-const Header = () => (
+const Header = ({children}) => (
   <div className='header'>
     <div className="top-header">
       <div className='menu-btn'>
@@ -17,6 +17,7 @@ const Header = () => (
         <div className="avatar"></div>
       </div>
     </div>
+    {children}
   </div>
 );
 

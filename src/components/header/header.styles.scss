@@ -3,9 +3,12 @@
   width: 100vw;
   background-color: #D81B5D;
   padding: 0 5vw;
-  margin-bottom: -80px;
+  padding-bottom: 70px;
+  margin-bottom: -60px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 
   .top-header {
     height: 80px;
