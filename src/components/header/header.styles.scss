@@ -26,12 +26,15 @@
       color: white;
       font-weight: 500;
     }
-    .avatar {
+    .small-avatar {
       width: 30px;
       height: 30px;
       margin-left: 10px;
       border-radius: 50%;
       background: white;
+      background-position: center;
+      background-size: cover;
+      border: 1px solid white;
     }
   }
 }

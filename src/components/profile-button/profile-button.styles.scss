@@ -1,0 +1,21 @@
+.profile-button {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgb(228, 228, 228);
+  padding: 15px;
+
+  .right-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .text {
+    padding-left: 8px;
+    // font-weight: bold;
+    font-size: 14px;
+    line-height: 12px;
+    color: rgba(49, 45, 45, 0.8);
+  }
+}

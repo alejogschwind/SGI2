@@ -2,7 +2,7 @@ import React from 'react';
 
 import './header.styles.scss';
 
-const Header = ({children}) => (
+const Header = ({children, avatar}) => (
   <div className='header'>
     <div className="top-header">
       <div className='menu-btn'>
@@ -14,7 +14,12 @@ const Header = ({children}) => (
       </div>
       <div className='user-info'>
         <span className='display-name'>Alejo G</span>
-        <div className="avatar"></div>
+        <div
+          className="small-avatar"
+          style={{
+            backgroundImage: `url(${avatar})`
+          }}
+        ></div>
       </div>
     </div>
     {children}
