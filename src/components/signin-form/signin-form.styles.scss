@@ -1,0 +1,27 @@
+.signin-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  
+  .card-signin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90vw;
+    height: 420px;
+    padding: 0 20px;
+    background: #FFFFFF;
+    border: 1px solid #DBDBDB;
+
+    .form-title {
+      text-align: center;
+    }
+  }
+
+
+  .signup-link {
+    margin-top: 30px;
+  }
+}

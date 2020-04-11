@@ -1,14 +1,14 @@
-.input-item {
+.form-group {
   display: flex;
   margin-top: 20px;
   flex-direction: column;
   
-  .lable {
+  label {
     font-size: 16px;
     line-height: 22px;
   }
   
-  .input {
+  .form-input {
     height: 40px;
     padding: 0 20px;
     border: 0.5px solid #C4C4C4;
