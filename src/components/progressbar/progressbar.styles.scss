@@ -1,0 +1,20 @@
+.progressbar {
+  width: 90vw;
+  height: 30px;
+  margin: 0 auto;
+  background: #d8d8d8;
+  border-radius: 20px;
+  
+  .progress-done {
+    color: white;
+    border-radius: 20px;
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    background: linear-gradient(90deg, rgba(216, 27, 93, 0.83) 45.29%, rgba(100, 12, 107, 0.7) 138.03%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s ease 0.3s;
+  }
+}

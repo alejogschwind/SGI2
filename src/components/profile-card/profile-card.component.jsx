@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Avatar from '../avatar/avatar.component'
 import ProfileButton from '../profile-button/profile-button.component';
@@ -19,7 +20,9 @@ const ProfileCard = ({user}) => (
       <span className="email">alejogschiwnd.97@gmail.com</span>
     </div>
     <div className="menu">
-      <ProfileButton text="Datos Personales" icon={<PersonIcon />}/>
+      <Link to='/profile/personal'>
+        <ProfileButton text="Datos Personales" icon={<PersonIcon />}/>
+      </Link>
       <ProfileButton text="Datos Medicos" icon={<MedicalIcon />}/>
       <ProfileButton text="Datos Institucionales" icon={<InstitutionalIcon />}/>
       <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>

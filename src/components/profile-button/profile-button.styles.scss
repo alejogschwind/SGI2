@@ -5,6 +5,10 @@
   justify-content: space-between;
   border-bottom: 0.5px solid rgb(228, 228, 228);
   padding: 15px;
+  
+  &:hover {
+    background: rgb(240, 240, 240);
+  }
 
   .right-section {
     display: flex;
@@ -13,6 +17,7 @@
 
   .text {
     padding-left: 8px;
+    
     // font-weight: bold;
     font-size: 14px;
     line-height: 12px;

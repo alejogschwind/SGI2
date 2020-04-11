@@ -1,6 +1,8 @@
 import React from 'react';
 
-const InputItem = ({type, name, lable, placehodler, required}) => (
+import './input-item.styles.scss'
+
+const InputItem = ({type, name, lable, placeholder, required}) => (
   <div className="input-item">
     <div className="lable">
       {lable}
@@ -9,7 +11,7 @@ const InputItem = ({type, name, lable, placehodler, required}) => (
       className="input"
       type={type}
       name={name}
-      placeholder={placehodler}
+      placeholder={placeholder}
       required={required}
     />
   </div>
