@@ -51,7 +51,7 @@ class SignInForm extends React.Component {
             <CustomButton type='submit'>Ingresa</CustomButton>
           </form>
           <CustomButton
-            secondary={true}
+            secondary
             onClick={signInWithGoogle}
           >Ingresa con Google</CustomButton>
         </div>

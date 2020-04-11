@@ -10,12 +10,12 @@
   justify-content: center;
   align-items: center;
   
+  &.googleButton {
+    background: #4C8BF5;
+  }
+  
   .button-text {
     color: white;
     font-size: 16px;
   }
-}
-
-.googleButton {
-  background: #4C8BF5;
 }
