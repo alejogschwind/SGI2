@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
@@ -19,13 +20,13 @@ class SignInForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    this.setState({ emial: '', password: ''})
+    this.setState({ email: '', password: ''})
   }
 
   handleChange = event => {
     const { value, name } = event.target;
     
-    this.state({ [name] : value})
+    this.setState({ [name] : value})
   }
   
   render() {
@@ -38,15 +39,19 @@ class SignInForm extends React.Component {
               type='text'
               name='email'
               label='Email'
+              value={this.state.email}
               placeholder='Ingrese su email...'
-              required={true}
+              handleChange={this.handleChange}
+              required
             />
             <FormInput
               type='password'
               name='password'
               label='Contraseña'
+              value={this.state.password}
               placeholder='Ingrese su contraseña...'
-              required={true}
+              handleChange={this.handleChange}
+              required
             />
             <CustomButton type='submit'>Ingresa</CustomButton>
           </form>
@@ -55,7 +60,7 @@ class SignInForm extends React.Component {
             onClick={signInWithGoogle}
           >Ingresa con Google</CustomButton>
         </div>
-        <span className='signup-link'>No tienes una cuenta? Registrate aquí</span>
+        <span className='signup-link'>No tienes una cuenta? <Link to='/signup'>Registrate aquí</Link></span>
       </div>
     );
   }

@@ -1,14 +1,15 @@
-.signin-wrapper {
+.signup-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
   
-  .card-signin {
+  .card-signup {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 90vw;
+    width: 90vw;;
     padding: 30px 20px;
     background: #FFFFFF;
     border: 1px solid #DBDBDB;
@@ -20,7 +21,7 @@
   }
 
 
-  .signup-link {
+  .signin-link {
     margin-top: 20px;
     font-size: 12px;
   }
