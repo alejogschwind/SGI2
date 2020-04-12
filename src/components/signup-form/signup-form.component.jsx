@@ -5,6 +5,8 @@ import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
 import './signup-form.styles.scss';
 
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
@@ -18,16 +20,37 @@ class SignUpForm extends React.Component {
     }
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault()
 
-    this.setState({
-      name: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    })
+    const { name, lastName, email, password, confirmPassword} = this.state;
+
+    if (password !== confirmPassword) {
+      alert('password don´t match')
+      this.state({
+        password: '',
+        confirmPassword: ''
+      })
+      return;
+    }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email,password)
+      const words = name.split(' ')
+      const displayName = `${words[0]} ${lastName[0]}`
+
+      await createUserProfileDocument(user, {displayName, photoURL:null, personalData:null})
+    
+      this.setState({
+        name: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      })
+    } catch(err) {
+      console.log('Error creating a user with email and password.', err)
+    }
   }
 
   handleChange = event => {
