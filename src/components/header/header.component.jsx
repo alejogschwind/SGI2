@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './header.styles.scss';
 
-const Header = ({children, avatar}) => (
+const Header = ({children, currentUser}) => (
   <div className='header'>
     <div className="top-header">
       <Link to='/'>
@@ -16,12 +17,12 @@ const Header = ({children, avatar}) => (
         </div>
       </Link>
       <div className='user-info'>
-        <span className='display-name'>Alejo G</span>
+        <span className='display-name'>{currentUser ? currentUser.displayName : ''}</span>
         <Link to='/profile'>
           <div
             className="small-avatar"
             style={{
-              backgroundImage: `url(${avatar})`
+              backgroundImage: `url(${currentUser ? currentUser.photoURL : ''})`
             }}
           ></div>
         </Link>
@@ -31,4 +32,8 @@ const Header = ({children, avatar}) => (
   </div>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header);
