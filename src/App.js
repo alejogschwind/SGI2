@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import HomePage from './pages/homepage/homepage.component';
@@ -10,26 +10,35 @@ import PersonalData from './pages/personal-data/personal-data.component';
 import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
-
+import requiredAuth from './routerProtector';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true
+    }
+  }
   unsubscribeFromAuth = null
 
-  componentDidMount() {
+  componentWillMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapShot => {
+        await userRef.onSnapshot(snapShot => {
           setCurrentUser({
               id: snapShot.id,
               ...snapShot.data()
             })
         });
 
+        this.setState({loading: false})
       } else {
-        setCurrentUser({ userAuth })
+        await setCurrentUser({ userAuth })
+        this.setState({loading: false})
       }
     })
   }
@@ -39,22 +48,27 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          <Route exact path='/' component={requiredAuth(HomePage)} />
           <Route exact path='/signin' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/profile' component={Profile} />
-          <Route exact path='/profile/personal' component={PersonalData} />
+          <Route exact path='/profile' component={requiredAuth(Profile)} />
+          <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
         </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

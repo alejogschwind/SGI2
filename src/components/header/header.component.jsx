@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './header.styles.scss';
+import withLoading from '../../HOCs/withLoading';
 
 const Header = ({children, currentUser}) => (
   <div className='header'>
@@ -36,4 +37,4 @@ const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withLoading(Header));

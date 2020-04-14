@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Avatar from '../avatar/avatar.component'
@@ -15,7 +15,7 @@ import {ReactComponent as LogoutIcon} from './assets/logout.svg';
 import './profile-card.styles.scss';
 import { auth } from '../../firebase/firebase.utils';
 
-const ProfileCard = ({ currentUser }) => (
+const ProfileCard = ({ currentUser, history }) => (
   <div className="profile-card">
     <div className="data-container">
       <Avatar avatar={currentUser ? currentUser.photoURL : ''}/>
@@ -30,7 +30,10 @@ const ProfileCard = ({ currentUser }) => (
       <ProfileButton text="Datos Institucionales" icon={<InstitutionalIcon />}/>
       <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>
       <ProfileButton text="Info" icon={<InfoIcon />}/>
-      <div onClick={() => auth.signOut()}>
+      <div onClick={() => {
+        auth.signOut()
+        history.push('/signin')
+      }}>
         <ProfileButton
           text="Cerrar sesión"
           icon={<LogoutIcon />}

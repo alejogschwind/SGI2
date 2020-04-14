@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
@@ -24,8 +24,8 @@ class SignInForm extends React.Component {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-
       this.setState({ email: '', password: ''});
+      this.props.history.push('/profile')
     } catch(err) {
       console.log('Error signing in with email and password.', err);
     }
@@ -67,7 +67,10 @@ class SignInForm extends React.Component {
           </form>
           <CustomButton
             secondary
-            onClick={signInWithGoogle}
+            onClick={async() => {
+              await signInWithGoogle()
+              this.props.history.push('/profile')
+            }}
           >Ingresa con Google</CustomButton>
         </div>
         <span className='signup-link'>No tienes una cuenta? <Link to='/signup'>Registrate aquí</Link></span>
@@ -76,4 +79,4 @@ class SignInForm extends React.Component {
   }
 } 
 
-export default SignInForm;
+export default withRouter(SignInForm);

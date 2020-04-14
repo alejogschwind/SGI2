@@ -23,7 +23,7 @@ class Profile extends React.Component {
     return (
       <div className="profile">
         <Header />
-        <ProfileCard />
+        <ProfileCard history={this.props.history}/>
       </div>
     );
   }

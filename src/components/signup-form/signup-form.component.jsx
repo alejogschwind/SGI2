@@ -35,11 +35,47 @@ class SignUpForm extends React.Component {
     }
 
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(email,password)
+      const { user } = await auth.createUserWithEmailAndPassword(email, password)
       const words = name.split(' ')
       const displayName = `${words[0]} ${lastName[0]}`
 
-      await createUserProfileDocument(user, {displayName, photoURL:null, personalData:null})
+      const userData = {
+        displayName: displayName,
+        photoURL: undefined,
+        loginWithGoogle: false,
+        personal: {
+          name: {
+            first: name,
+            last: lastName
+          },
+          birth: undefined,
+          gender: undefined,
+          passport: undefined,
+          percentage: 0.33,
+          phone: undefined
+        }
+      }
+
+      try {
+        await createUserProfileDocument(user,{
+          displayName: displayName,
+          photoURL: null,
+          loginWithGoogle: false,
+          personal: {
+            name: {
+              first: name,
+              last: lastName
+            },
+            birth: null,
+            gender: null,
+            passport: null,
+            percentage: 0.33,
+            phone: null
+          }
+        })
+      } catch(err) {
+        console.log('Error trying to create user profile',err)
+      }
     
       this.setState({
         name: '',

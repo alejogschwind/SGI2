@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
@@ -25,24 +26,25 @@ class PersonalForm extends React.Component {
     event.preventDefault()
 
     const { firstname, lastname, passport, birth, gender, phone } = this.state;
+    const { userId } = this.props;
 
     const personalData = {
       name: {
         first: firstname,
         last: lastname
       },
-      gender,
-      passport,
-      birth,
-      phone,
+      gender: gender,
+      passport: passport,
+      birth: birth,
+      phone: phone,
       percentage: 1
     }
     const displayName = `${firstname.split(' ')[0]} ${lastname[0]}`
 
     try {
       // await auth.signInWithEmailAndPassword(email, password);
-      console.log(firestore.collection('users').doc('0Z4fPXp98Ef3eoQqOPMmzKTeTo43'))
-      await firestore.collection('users').doc('0Z4fPXp98Ef3eoQqOPMmzKTeTo43')
+      console.log(firestore.collection('users').doc(userId))
+      await firestore.collection('users').doc(userId)
         .update({
           displayName: displayName,
           personal: personalData
@@ -60,6 +62,19 @@ class PersonalForm extends React.Component {
     const { value, name } = event.target;
     
     this.setState({ [name] : value})
+  }
+
+  componentDidMount() {
+    const { first, last } = this.props.personal.name;
+    const { passport, birth, gender, phone } = this.props.personal;
+    this.setState({
+      firstname: first ? first : '',
+      lastname: last ? last : '',
+      passport: passport ? passport : '',
+      birth: birth ? birth : undefined,
+      gender: gender ? gender: '',
+      phone: phone ? phone : ''
+    })
   }
 
   render() {
@@ -127,4 +142,8 @@ class PersonalForm extends React.Component {
   )}
 }
 
-export default PersonalForm;
+const mapStateToProps = state => ({
+  userId: state.user.currentUser.id
+})
+
+export default connect(mapStateToProps)(PersonalForm);
