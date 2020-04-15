@@ -6,8 +6,9 @@ import { auth } from './firebase/firebase.utils';
 
 export default function(ComposedComponent) {
   class Authenticate extends React.Component {
-    componentWillMount() {
-      if (!auth) {
+    componentDidMount() {
+      // console.log(auth.currentUser);
+      if (!this.props.isAuth) {
         this.props.history.push('/signin')
       }
     }
@@ -20,8 +21,9 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
+    console.log(state.user.currentUser)
     return {
-      // isAuth: (state.user.currentUser != null),
+      isAuth: (state.user.currentUser),
       // userId: state.user.currentUser.id
     }
   }

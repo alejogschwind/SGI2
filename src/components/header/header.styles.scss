@@ -16,6 +16,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .menu-btn {
+
+      svg {
+        margin-top: 3px;
+        height: 35px;
+        width: 80px;
+      }
+    }
   }
 
   .user-info {
@@ -28,8 +37,8 @@
       text-decoration: none;
     }
     .small-avatar {
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       margin-left: 10px;
       border-radius: 50%;
       background: white;

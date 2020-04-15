@@ -26,6 +26,7 @@ class ImageUploader extends React.Component {
 
   handelUpload = async () => {
     const { image } = this.state;
+    if (!image) return;
     const uploadTask = storage.ref(`profile-photos/${image.name}`).put(image);
     const { userId } = this.props;
     

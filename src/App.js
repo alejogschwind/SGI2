@@ -37,11 +37,12 @@ class App extends React.Component {
             })
         });
 
-        this.setState({loading: false})
       } else {
         await setCurrentUser({ userAuth })
-        this.setState({loading: false})
       }
+      setTimeout(async() => {
+        await this.setState({loading: false})
+      }, 1000)
     })
   }
 
@@ -50,18 +51,23 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    const { loading } = this.state;
     return (
       <div>
-        <Switch>
-          <Route exact path='/signin' component={SignIn} />
-          <Route exact path='/signup' component={SignUp} />
-          <Layout>
-            <Route exact path='/' component={requiredAuth(HomePage)} />
-            <Route exact path='/profile' component={requiredAuth(Profile)} />
-            <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
-          </Layout>
-        </Switch>
+        {
+          !loading ?
+          <Switch>
+            <Route exact path='/signin' component={SignIn} />
+            <Route exact path='/signup' component={SignUp} />
+            <Layout>
+              <Route exact path='/' component={requiredAuth(HomePage)} />
+              <Route exact path='/profile' component={requiredAuth(Profile)} />
+              <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
+            </Layout>
+          </Switch>
+          :
+          'Loading..'
+        }
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
+import {ReactComponent as Logo} from '../../assets/logo.svg';
 import './signin-form.styles.scss'
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
@@ -28,9 +29,9 @@ class SignInForm extends React.Component {
       this.props.history.push('/profile')
     } catch(err) {
       console.log('Error signing in with email and password.', err);
+      this.setState({ email: '', password: ''})
     }
 
-    this.setState({ email: '', password: ''})
   }
 
   handleChange = event => {
@@ -43,7 +44,10 @@ class SignInForm extends React.Component {
     return (
       <div className='signin-wrapper'>
         <div className="card-signin">
-          <h2 className='form-title'>Ingresa al <br /> SGI2.0</h2>
+          <h2 className='form-title'></h2>
+          <div className='logo'>
+            <Logo />
+          </div>
           <form onSubmit={this.handleSubmit}>
             <FormInput
               type='text'
@@ -63,7 +67,7 @@ class SignInForm extends React.Component {
               handleChange={this.handleChange}
               required
             />
-            <CustomButton type='submit'>Ingresa</CustomButton>
+            <CustomButton type='submit'>Ingresar</CustomButton>
           </form>
           <CustomButton
             secondary
@@ -71,7 +75,7 @@ class SignInForm extends React.Component {
               await signInWithGoogle()
               this.props.history.push('/profile')
             }}
-          >Ingresa con Google</CustomButton>
+          >Ingresar con Google</CustomButton>
         </div>
         <span className='signup-link'>No tienes una cuenta? <Link to='/signup'>Registrate aquí</Link></span>
       </div>

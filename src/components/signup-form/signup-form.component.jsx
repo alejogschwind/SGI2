@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
+import {ReactComponent as Logo} from '../../assets/logo.svg';
 import './signup-form.styles.scss';
 
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
@@ -99,7 +100,10 @@ class SignUpForm extends React.Component {
     return (
       <div className='signup-wrapper'>
         <div className="card-signup">
-          <h2 className='form-title'>Registrate al nuevo <br /> SGI2.0</h2>
+          <h2 className='form-title'></h2>
+          <div className='logo'>
+            <Logo />
+          </div>
           <form onSubmit={this.handleSubmit}>
             <FormInput
               type='text'

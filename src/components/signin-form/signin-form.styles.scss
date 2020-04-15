@@ -17,6 +17,14 @@
     .form-title {
       text-align: center;
     }
+    .logo {
+      display: flex;
+      justify-content: center;
+      svg {
+        height: 120px;
+        
+      }
+    }
   }
 
 

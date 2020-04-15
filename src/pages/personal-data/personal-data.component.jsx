@@ -48,22 +48,30 @@ class PersonalData extends React.Component {
 
 
   render(){
+    const { loading } = this.state;
     return (
       <div className='personal-data'>
         <FormWrapper>
-          <div className='progressbar-wrapper'>
-            <h5>Datos completos al:</h5>
-            {this.state.personal ?
-              <Progressbar
-                progress={this.state.personal.percentage}
-              />
-              : ''
-            }
-            
-          </div>
-          { !this.state.loading ?
-            <PersonalForm personal={this.state.personal}/>
-            : ''
+          {
+            !loading ?   
+              <>
+                <div className='progressbar-wrapper'>
+                  <h5>Datos completos al:</h5>
+                  <Progressbar
+                    progress={this.state.personal.percentage}
+                  />
+                  {/* {this.state.personal ?
+                    : 
+                    <Progressbar
+                      progress={0}
+                    />
+                  } */}
+                  
+                </div>
+                <PersonalForm personal={this.state.personal}/>
+              </>
+            :
+             ''
           }
         </FormWrapper>
       </div>
