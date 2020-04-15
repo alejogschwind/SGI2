@@ -28,7 +28,6 @@ class Profile extends React.Component {
     const { currentUser, loading } = this.state;
     return (
       <div className="profile">
-        <Header />
         <ProfileCard history={this.props.history}/>
         { !loading ?
             <ImageUploader userId={this.state.currentUser.id}/>

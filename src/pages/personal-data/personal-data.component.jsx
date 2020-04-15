@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Header from '../../components/header/header.component';
+import Layout from '../../components/layout/layout.component';
 import PersonalForm from '../../components/personal-form/personal-form.component';
 import FormWrapper from '../../components/form-wrapper/form-wrapper.component';
 import Progressbar from '../../components/progressbar/progressbar.component';
@@ -50,7 +50,6 @@ class PersonalData extends React.Component {
   render(){
     return (
       <div className='personal-data'>
-        <Header />
         <FormWrapper>
           <div className='progressbar-wrapper'>
             <h5>Datos completos al:</h5>
