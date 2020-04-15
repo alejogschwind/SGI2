@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Header from '../../components/header/header.component';
 import ProfileCard from '../../components/profile-card/profile-card.component';
+import ImageUploader from '../../components/image-uploader/image-uploader.component';
 
 import './profile.styles.scss';
 
@@ -10,23 +12,36 @@ class Profile extends React.Component {
     super(props);
 
     this.state = {
-      user: {
-        id: 1,
-        first_name: 'Alejo',
-        last_name: 'Gschwind',
-        avatar: 'https://www.rotary.org/sites/default/files/styles/w_600/public/Paul%20Harris%201600x1600.jpg?itok=yoT8tu9x',
-      }
+      loading: true,
+      currentUser: null
+    }
+  }
+  
+  componentDidMount() {
+    const { currentUser } = this.props;
+    if (currentUser) {
+      this.setState({currentUser: currentUser, loading: false})
     }
   }
 
   render() {
+    const { currentUser, loading } = this.state;
     return (
       <div className="profile">
         <Header />
         <ProfileCard history={this.props.history}/>
+        { !loading ?
+            <ImageUploader userId={this.state.currentUser.id}/>
+          :
+            ''
+        }
       </div>
     );
   }
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Profile);
