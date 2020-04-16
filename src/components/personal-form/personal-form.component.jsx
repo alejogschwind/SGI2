@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.compoent';
+import SelectInput from '../select-input/select-input.component';
 import CustomButton from '../custom-button/custom-buton.components';
 
 import './personal-form.styles.scss'
@@ -117,9 +118,17 @@ class PersonalForm extends React.Component {
           value={this.state.birth}
           required
         />
-        <FormInput
+        {/* <FormInput
           label='Sexo'
           type='select'
+          name='gender'
+          placeholder='Seleccione su sexo'
+          handleChange={this.handleChange}
+          value={this.state.gender}
+          required
+        /> */}
+        <SelectInput
+          label='Sexo'
           name='gender'
           placeholder='Seleccione su sexo'
           handleChange={this.handleChange}

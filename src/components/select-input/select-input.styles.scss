@@ -1,0 +1,19 @@
+.select-group {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  
+  .select-input {
+    height: 40px;
+    width: 100%;
+    padding: 0 20px;
+    border: 0.5px solid #C4C4C4;
+    border-radius: 7px;
+    background: white;
+  
+    label {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+}
