@@ -132,6 +132,11 @@ class PersonalForm extends React.Component {
           name='gender'
           placeholder='Seleccione su sexo'
           handleChange={this.handleChange}
+          options={[
+            'Femenino',
+            'Masculino',
+            'Otro'
+          ]}
           value={this.state.gender}
           required
         />

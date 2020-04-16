@@ -8,6 +8,7 @@ import SignIn from './pages/sign-in/signin.component';
 import SignUp from './pages/sign-up/sign-up.component';
 import Profile from './pages/profile/profile.component';
 import PersonalData from './pages/personal-data/personal-data.component';
+import MedicalData from './pages/medical-data/medical-data.component';
 import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
@@ -63,6 +64,7 @@ class App extends React.Component {
               <Route exact path='/' component={requiredAuth(HomePage)} />
               <Route exact path='/profile' component={requiredAuth(Profile)} />
               <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
+              <Route exact path='/profile/medical' component={requiredAuth(MedicalData)} />
             </Layout>
           </Switch>
           :

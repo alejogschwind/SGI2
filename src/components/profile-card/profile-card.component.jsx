@@ -26,7 +26,9 @@ const ProfileCard = ({ currentUser, history }) => (
       <Link to='/profile/personal'>
         <ProfileButton text="Datos Personales" icon={<PersonIcon />}/>
       </Link>
-      <ProfileButton text="Datos Medicos" icon={<MedicalIcon />}/>
+      <Link to='/profile/medical'>
+        <ProfileButton text="Datos Medicos" icon={<MedicalIcon />}/>
+      </Link>
       <ProfileButton text="Datos Institucionales" icon={<InstitutionalIcon />}/>
       <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>
       <ProfileButton text="Info" icon={<InfoIcon />}/>

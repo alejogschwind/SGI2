@@ -40,22 +40,40 @@ class SignUpForm extends React.Component {
       const words = name.split(' ')
       const displayName = `${words[0]} ${lastName[0]}`
 
-      const userData = {
-        displayName: displayName,
-        photoURL: undefined,
-        loginWithGoogle: false,
-        personal: {
-          name: {
-            first: name,
-            last: lastName
-          },
-          birth: undefined,
-          gender: undefined,
-          passport: undefined,
-          percentage: 0.33,
-          phone: undefined
-        }
-      }
+      // const userData = {
+      //   displayName: displayName,
+      //   photoURL: undefined,
+      //   loginWithGoogle: false,
+      //   personal: {
+      //     name: {
+      //       first: name,
+      //       last: lastName
+      //     },
+      //     birth: undefined,
+      //     gender: undefined,
+      //     passport: undefined,
+      //     percentage: 0.33,
+      //     phone: undefined
+      //   },
+      //   medical: {
+      //     healthInsurance: '',
+      //     affiliateNumber: '',
+      //     bloodType: '',
+      //     havePeriodicTreatment: '',
+      //     obsPeriodicTreatment: '',
+      //     haveAllergy: '',
+      //     obsAllergy: '',
+      //     haveSpecialDiet: '',
+      //     obsSpecialDiet: '',
+      //     haveSurgery: '',
+      //     obsSurgery: '',
+      //     takeMedication: '',
+      //     obsMedication: '',
+      //     havePhysicalLimitations: '',
+      //     obsPhysicalLimitations: '',
+      //     obsMedicalData: ''
+      //   }
+      // }
 
       try {
         await createUserProfileDocument(user,{
@@ -72,6 +90,25 @@ class SignUpForm extends React.Component {
             passport: null,
             percentage: 0.33,
             phone: null
+          },
+          medical: {
+            percentage: 0,
+            healthInsurance: '',
+            affiliateNumber: '',
+            bloodType: '',
+            havePeriodicTreatment: '',
+            obsPeriodicTreatment: '',
+            haveAllergy: '',
+            obsAllergy: '',
+            haveSpecialDiet: '',
+            obsSpecialDiet: '',
+            haveSurgery: '',
+            obsSurgery: '',
+            takeMedication: '',
+            obsMedication: '',
+            havePhysicalLimitations: '',
+            obsPhysicalLimitations: '',
+            obsMedicalData: ''
           }
         })
       } catch(err) {

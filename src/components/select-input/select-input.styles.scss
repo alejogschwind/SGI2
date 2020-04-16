@@ -10,7 +10,15 @@
     border: 0.5px solid #C4C4C4;
     border-radius: 7px;
     background: white;
-  
+    color: grey;
+
+    & option {
+      color: black;
+    }
+    & option:first-child {
+      color: grey !important;
+    }
+
     label {
       font-size: 16px;
       line-height: 22px;
