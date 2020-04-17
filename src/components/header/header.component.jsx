@@ -6,7 +6,15 @@ import {ReactComponent as Logo} from '../../assets/logo-white.svg';
 import './header.styles.scss';
 import withLoading from '../../HOCs/withLoading';
 
-const Header = ({children, currentUser}) => (
+const Header = ({children, currentUser}) => {
+  // let displayName;
+  // if (currentUser) {
+  //   const words = currentUser.displayName.split(' ');
+
+  //   displayName = `${words[0]}`
+  // }
+
+  return (
   <div className='header'>
     <div className="top-header">
       <Link to='/'>
@@ -59,7 +67,7 @@ const Header = ({children, currentUser}) => (
     </div>
     {children}
   </div>
-);
+)};
 
 const mapStateToProps = state => ({
   currentUser: state.user.currentUser

@@ -40,7 +40,7 @@ class PersonalForm extends React.Component {
       phone: phone,
       percentage: 1
     }
-    const displayName = `${firstname.split(' ')[0]} ${lastname[0]}`
+    const displayName = `${firstname} ${lastname}`
 
     try {
       // await auth.signInWithEmailAndPassword(email, password);
@@ -135,7 +135,7 @@ class PersonalForm extends React.Component {
           value={this.state.gender}
           required
         />
-        
+
         <FormInput
           label='Telefono'
           type='tel'

@@ -20,7 +20,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { displayName, email, photoURL, emailVerified } = userAuth;
+    const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
     try {
       await userRef.set({
@@ -28,7 +28,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         email,
         photoURL,
         createdAt,
-        emailVerified,
         loginWithGoogle: true,
         ...additionalData
       });
@@ -48,6 +47,65 @@ export const storage = firebase.storage();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+export const signInWithGoogle = async () => {
+  const { user } = await auth.signInWithPopup(provider);
+  const { displayName, photoURL } = user;
+  try {
+    await createUserProfileDocument(user,{
+      displayName: displayName,
+      photoURL: photoURL,
+      loginWithGoogle: true,
+      profileCompletePercentage: 0,
+      personal: {
+        percentage: 0,
+        name: {
+          first: '',
+          last: ''
+        },
+        birth: null,
+        gender: null,
+        passport: null,
+        contry: '',
+        state: '',
+        city: '',
+        phone: null
+      },
+      medical: {
+        percentage: 0,
+        healthInsurance: '',
+        affiliateNumber: '',
+        bloodType: '',
+        havePeriodicTreatment: '',
+        obsPeriodicTreatment: '',
+        haveAllergy: '',
+        obsAllergy: '',
+        haveSpecialDiet: '',
+        obsSpecialDiet: '',
+        haveSurgery: '',
+        obsSurgery: '',
+        takeMedication: '',
+        obsMedication: '',
+        havePhysicalLimitations: '',
+        obsPhysicalLimitations: '',
+        obsMedicalData: ''
+      },
+      institutional: {
+        percentage: 0,
+        weel: '',
+        district: '',
+        club: '',
+      },
+      contact: {
+        percentage: 0,
+        fullName: '',
+        relation: '',
+        phone: ''
+      }
+    })
+
+  } catch(err) {
+    console.log('Error trying to create user profile',err)
+  }
+}
 export default firebase;

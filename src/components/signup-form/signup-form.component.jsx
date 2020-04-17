@@ -13,8 +13,8 @@ class SignUpForm extends React.Component {
     super(props);
 
     this.state = {
-      name: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       email: '',
       password: '',
       confirmPassword: ''
@@ -24,7 +24,7 @@ class SignUpForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
 
-    const { name, lastName, email, password, confirmPassword} = this.state;
+    const { firstname, lastname, email, password, confirmPassword} = this.state;
 
     if (password !== confirmPassword) {
       alert('password don´t match')
@@ -37,8 +37,7 @@ class SignUpForm extends React.Component {
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password)
-      const words = name.split(' ')
-      const displayName = `${words[0]} ${lastName[0]}`
+      const displayName = `${firstname} ${lastname}`
 
       try {
         await createUserProfileDocument(user,{
@@ -49,8 +48,8 @@ class SignUpForm extends React.Component {
           personal: {
             percentage: 0.33,
             name: {
-              first: name,
-              last: lastName
+              first: firstname,
+              last: lastname
             },
             birth: null,
             gender: null,
@@ -92,13 +91,20 @@ class SignUpForm extends React.Component {
             phone: ''
           }
         })
+
+        try {
+          await user.sendEmailVerification()
+          console.log('We send you a email with a link to verify your account.')
+        } catch(err) {
+          console.log('Error sending email verification',err)
+        }
       } catch(err) {
         console.log('Error trying to create user profile',err)
       }
     
       this.setState({
-        name: '',
-        lastName: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -125,19 +131,19 @@ class SignUpForm extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <FormInput
               type='text'
-              name='name'
+              name='firstname'
               label='Nombre'
               placeholder='Ingrese su nombre...'
-              value={this.state.name}
+              value={this.state.firstname}
               handleChange={this.handleChange}
               required
             />
             <FormInput
               type='text'
-              name='lastName'
+              name='lastname'
               label='Apellido'
               placeholder='Ingrese su apellido...'
-              value={this.state.lastName}
+              value={this.state.lastname}
               handleChange={this.handleChange}
               required
             />
