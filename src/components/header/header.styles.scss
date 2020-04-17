@@ -40,11 +40,12 @@
       width: 35px;
       height: 35px;
       margin-left: 10px;
+      border: 1px solid white;
       border-radius: 50%;
       background: white;
       background-position: center;
       background-size: cover;
-      border: 1px solid white;
+      background-repeat: no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;

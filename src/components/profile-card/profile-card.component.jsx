@@ -29,7 +29,9 @@ const ProfileCard = ({ currentUser, history }) => (
       <Link to='/profile/medical'>
         <ProfileButton text="Datos Medicos" icon={<MedicalIcon />}/>
       </Link>
-      <ProfileButton text="Datos Institucionales" icon={<InstitutionalIcon />}/>
+      <Link to='/profile/institutional'>
+        <ProfileButton text="Datos Institucionales" icon={<InstitutionalIcon />}/>
+      </Link>
       <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>
       <ProfileButton text="Info" icon={<InfoIcon />}/>
       <div onClick={() => {

@@ -5,14 +5,15 @@
   border-radius: 50%;
   background-position: center;
   margin-top: -75px;
+  background: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
 
   .edit-btn {
     position: absolute;

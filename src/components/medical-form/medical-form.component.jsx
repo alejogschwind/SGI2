@@ -44,13 +44,14 @@ class MedicalForm extends React.Component {
       // await auth.signInWithEmailAndPassword(email, password);
       console.log(firestore.collection('users').doc(userId))
       await firestore.collection('users').doc(userId)
-        .update({
-          medical: medicalData
-        })
+      .update({
+        medical: medicalData
+      })
       
       console.log('Updated Medical Data')
-
+      
     } catch(err) {
+      this.setState({percentage: 0})
       console.log('Error updating medical data.', err);
     }
 

@@ -109,6 +109,12 @@ class SignUpForm extends React.Component {
             havePhysicalLimitations: '',
             obsPhysicalLimitations: '',
             obsMedicalData: ''
+          },
+          institutional: {
+            percentage: 0,
+            weel: '',
+            district: '',
+            club: '',
           }
         })
       } catch(err) {
