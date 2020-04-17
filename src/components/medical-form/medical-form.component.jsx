@@ -36,7 +36,7 @@ class MedicalForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    this.setState({percentage: 1})
+    await this.setState({percentage: 1})
     const { userId } = this.props;
     const medicalData = {...this.state};
     

@@ -40,47 +40,14 @@ class SignUpForm extends React.Component {
       const words = name.split(' ')
       const displayName = `${words[0]} ${lastName[0]}`
 
-      // const userData = {
-      //   displayName: displayName,
-      //   photoURL: undefined,
-      //   loginWithGoogle: false,
-      //   personal: {
-      //     name: {
-      //       first: name,
-      //       last: lastName
-      //     },
-      //     birth: undefined,
-      //     gender: undefined,
-      //     passport: undefined,
-      //     percentage: 0.33,
-      //     phone: undefined
-      //   },
-      //   medical: {
-      //     healthInsurance: '',
-      //     affiliateNumber: '',
-      //     bloodType: '',
-      //     havePeriodicTreatment: '',
-      //     obsPeriodicTreatment: '',
-      //     haveAllergy: '',
-      //     obsAllergy: '',
-      //     haveSpecialDiet: '',
-      //     obsSpecialDiet: '',
-      //     haveSurgery: '',
-      //     obsSurgery: '',
-      //     takeMedication: '',
-      //     obsMedication: '',
-      //     havePhysicalLimitations: '',
-      //     obsPhysicalLimitations: '',
-      //     obsMedicalData: ''
-      //   }
-      // }
-
       try {
         await createUserProfileDocument(user,{
           displayName: displayName,
           photoURL: null,
           loginWithGoogle: false,
+          profileCompletePercentage: 0,
           personal: {
+            percentage: 0.33,
             name: {
               first: name,
               last: lastName
@@ -88,7 +55,9 @@ class SignUpForm extends React.Component {
             birth: null,
             gender: null,
             passport: null,
-            percentage: 0.33,
+            contry: '',
+            state: '',
+            city: '',
             phone: null
           },
           medical: {
@@ -115,6 +84,12 @@ class SignUpForm extends React.Component {
             weel: '',
             district: '',
             club: '',
+          },
+          contact: {
+            percentage: 0,
+            fullName: '',
+            relation: '',
+            phone: ''
           }
         })
       } catch(err) {

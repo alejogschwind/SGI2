@@ -10,6 +10,7 @@ import Profile from './pages/profile/profile.component';
 import PersonalData from './pages/personal-data/personal-data.component';
 import MedicalData from './pages/medical-data/medical-data.component';
 import InstitutionalData from './pages/institutional-data/institutional-data.component';
+import ContactData from './pages/contact-data/contact-data.component';
 import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
@@ -67,6 +68,7 @@ class App extends React.Component {
               <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
               <Route exact path='/profile/medical' component={requiredAuth(MedicalData)} />
               <Route exact path='/profile/institutional' component={requiredAuth(InstitutionalData)} />
+              <Route exact path='/profile/contact' component={requiredAuth(ContactData)} />
             </Layout>
           </Switch>
           :

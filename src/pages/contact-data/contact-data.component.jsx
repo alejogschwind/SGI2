@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import MedicalForm from '../../components/medical-form/medical-form.component';
-import FormWrapper from '../../components/form-wrapper/form-wrapper.component';
 import Progressbar from '../../components/progressbar/progressbar.component';
+import FormWrapper from '../../components/form-wrapper/form-wrapper.component';
+import ContactForm from '../../components/contact-form/contact-form.component';
 
-import './medical-data.styles.scss'
+import './contact-data.styles.scss';
 
 
-class MedicalData extends React.Component {
+class ContactData extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      medical: null,
+      contact: null,
       loading: true
     }
   }
@@ -21,7 +21,7 @@ class MedicalData extends React.Component {
   componentDidMount() {
     const { currentUser } = this.props;
     if (currentUser) {
-      this.setState({medical: currentUser.medical, loading: false })
+      this.setState({contact: currentUser.contact, loading: false })
     }
   }
 
@@ -29,18 +29,18 @@ class MedicalData extends React.Component {
   render(){
     const { loading } = this.state;
     return (
-      <div className='medical-data'>
+      <div className='contact-data'>
         <FormWrapper>
           {
-            !loading ?   
+            !loading ?
               <>
                 <div className='progressbar-wrapper'>
                   <h5>Datos completos al:</h5>
                   <Progressbar
-                    progress={this.state.medical.percentage}
+                    progress={this.state.contact.percentage}
                   />
                 </div>
-                <MedicalForm medical={this.state.medical}/>
+                <ContactForm contact={this.state.contact}/>
               </>
             :
              ''
@@ -55,4 +55,4 @@ const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
 
-export default connect(mapStateToProps)(MedicalData);
+export default connect(mapStateToProps)(ContactData);

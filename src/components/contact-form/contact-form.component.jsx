@@ -4,19 +4,20 @@ import { connect } from 'react-redux';
 import SelectInput from '../select-input/select-input.component';
 import CustomButton from '../custom-button/custom-buton.components';
 
-import './institutional-form.styles.scss'
+import './contact-form.styles.scss'
 
 import { firestore } from '../../firebase/firebase.utils';
+import FormInput from '../form-input/form-input.compoent';
 
-class InstitutionalForm extends React.Component {
+class ContactForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       percentage: null,
-      weel: '',
-      club: '',
-      district: '',
+      fullName: '',
+      relation: '',
+      phone: '',
     }
   }
 
@@ -24,21 +25,21 @@ class InstitutionalForm extends React.Component {
     event.preventDefault()
     await this.setState({percentage: 1})
     const { userId } = this.props;
-    const institutionalData = {...this.state};
+    const contactData = {...this.state};
     
     try {
       // await auth.signInWithEmailAndPassword(email, password);
       console.log(firestore.collection('users').doc(userId))
       await firestore.collection('users').doc(userId)
       .update({
-        institutional: institutionalData
+        contact: contactData
       })
       
-      console.log('Updated Institutional Data')
+      console.log('Updated Contact Data')
       
     } catch(err) {
       this.setState({percentage: 0})
-      console.log('Error updating Institutional Data.', err);
+      console.log('Error updating Contact Data.', err);
     }
 
   }
@@ -50,56 +51,46 @@ class InstitutionalForm extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({...this.props.institutional})
+    this.setState({...this.props.contact})
   }
 
   render() {
     return (
-    <div className="institutional-form">
+    <div className="contact-form">
       <form onSubmit={this.handleSubmit}>
+        <FormInput
+          label='Nombre completo'
+          name='fullName'
+          placeholder='Ingrese el nombre completo...'
+          handleChange={this.handleChange}
+          value={this.state.fullName}
+          required
+        />
+        
         <SelectInput
-          label='Rueda Rotaria'
-          name='weel'
+          label='Relacion con su contacto de emergencia'
+          name='relation'
           placeholder='Seleccione una opción...'
           handleChange={this.handleChange}
-          value={this.state.weel}
+          value={this.state.relation}
           options={[
-            'Rotaract',
-            'Interact',
-            'Rotary'
+            'Madre',
+            'Padre',
+            'Tutor'
           ]}
           required
         />
         
-        <SelectInput
-          label='Distrito'
-          name='district'
-          placeholder='Seleccione su distrito...'
+        <FormInput
+          label='Telefono'
+          name='phone'
+          placeholder='Ej: +5492284232823'
           handleChange={this.handleChange}
-          value={this.state.district}
-          options={[
-            '4921',
-            '4920',
-            '4930'
-          ]}
-          required
-        />
-        
-        <SelectInput
-          label='Club'
-          name='club'
-          placeholder='Seleccione su club...'
-          handleChange={this.handleChange}
-          value={this.state.club}
-          options={[
-            'Rotaract Club Tandil',
-            'Rotaract Club Olavarria',
-            'Rotaract Club Santiago del Estero'
-          ]}
+          value={this.state.phone}
           required
         />
 
-        <CustomButton type='submit'>Guardar datos institucionales</CustomButton>
+        <CustomButton type='submit'>Guardar contacto de emergencia</CustomButton>
       </form>
     </div>
   )}
@@ -109,4 +100,4 @@ const mapStateToProps = state => ({
   userId: state.user.currentUser.id
 })
 
-export default connect(mapStateToProps)(InstitutionalForm);
+export default connect(mapStateToProps)(ContactForm);

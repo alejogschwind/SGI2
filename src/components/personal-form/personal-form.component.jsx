@@ -91,6 +91,7 @@ class PersonalForm extends React.Component {
           value={this.state.firstname}
           required
         />
+
         <FormInput
           label='Apellidos'
           type='text'
@@ -100,6 +101,7 @@ class PersonalForm extends React.Component {
           value={this.state.lastname}
           required
         />
+
         <FormInput
           label='Documento de Identidad'
           type='text'
@@ -109,6 +111,7 @@ class PersonalForm extends React.Component {
           value={this.state.passport}
           required
         />
+
         <FormInput
           label='Fecha de Nacimiento'
           type='date'
@@ -118,15 +121,7 @@ class PersonalForm extends React.Component {
           value={this.state.birth}
           required
         />
-        {/* <FormInput
-          label='Sexo'
-          type='select'
-          name='gender'
-          placeholder='Seleccione su sexo'
-          handleChange={this.handleChange}
-          value={this.state.gender}
-          required
-        /> */}
+
         <SelectInput
           label='Sexo'
           name='gender'
@@ -140,6 +135,7 @@ class PersonalForm extends React.Component {
           value={this.state.gender}
           required
         />
+        
         <FormInput
           label='Telefono'
           type='tel'

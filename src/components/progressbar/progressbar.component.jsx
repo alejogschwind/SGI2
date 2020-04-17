@@ -5,14 +5,19 @@ import './progressbar.styles.scss'
 const Progressbar = ({ progress}) => {
   const [style, setStyle] = React.useState({});
 
-  setTimeout(() => {
-    const newStyle = {
-      opacity: 1,
-      width: `${progress * 100}%`
-    }
-
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      const newStyle = {
+        opacity: 1,
+        width: `${progress * 100}%`
+      }
     setStyle(newStyle)
-  })
+    }, 1000)
+    return () => {
+      clearTimeout(timer)
+    };
+  });
+
   return (
     <div className='progressbar'>
       <div className='progress-done' style={style}>

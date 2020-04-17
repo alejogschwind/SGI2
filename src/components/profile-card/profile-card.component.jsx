@@ -32,7 +32,9 @@ const ProfileCard = ({ currentUser, history }) => (
       <Link to='/profile/institutional'>
         <ProfileButton text="Datos Institucionales" icon={<InstitutionalIcon />}/>
       </Link>
-      <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>
+      <Link to='/profile/contact'>
+        <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>
+      </Link>
       <ProfileButton text="Info" icon={<InfoIcon />}/>
       <div onClick={() => {
         auth.signOut()
