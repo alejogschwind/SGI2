@@ -14,6 +14,7 @@ class PersonalForm extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       firstname: '',
       lastname: '',
       passport: '',
@@ -25,7 +26,7 @@ class PersonalForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-
+    this.setState({loading: true})
     const { firstname, lastname, passport, birth, gender, phone } = this.state;
     const { userId } = this.props;
 
@@ -51,9 +52,11 @@ class PersonalForm extends React.Component {
           personal: personalData
         })
       
+      this.setState({loading: false})
       console.log('Updated')
-
+      
     } catch(err) {
+      this.setState({loading: false})
       console.log('Error updating personal data.', err);
     }
 
@@ -146,7 +149,10 @@ class PersonalForm extends React.Component {
           required
         />
 
-        <CustomButton type='submit'>Guardar datos personales</CustomButton>
+        <CustomButton
+          type='submit'
+          loading={this.state.loading}
+        >Guardar datos personales</CustomButton>
       </form>
     </div>
   )}

@@ -25,8 +25,8 @@ class SignInForm extends React.Component {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: '', password: ''});
-      this.props.history.push('/profile')
+      await this.setState({ email: '', password: ''});
+      await this.props.history.push('/profile')
     } catch(err) {
       console.log('Error signing in with email and password.', err);
       this.setState({ email: '', password: ''})
@@ -39,7 +39,7 @@ class SignInForm extends React.Component {
     
     this.setState({ [name] : value})
   }
-  
+
   render() {
     return (
       <div className='signin-wrapper'>
@@ -73,7 +73,7 @@ class SignInForm extends React.Component {
             secondary
             onClick={async() => {
               await signInWithGoogle()
-              this.props.history.push('/profile')
+              await this.props.history.push('/profile')
             }}
           >Ingresar con Google</CustomButton>
         </div>

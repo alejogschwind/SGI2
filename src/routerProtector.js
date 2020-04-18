@@ -21,9 +21,9 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    console.log(state.user.currentUser)
+    console.log(state.user)
     return {
-      isAuth: !!(state.user.currentUser.userAuth),
+      isAuth: !!(state.user.currentUser),
       // userId: state.user.currentUser.id
     }
   }

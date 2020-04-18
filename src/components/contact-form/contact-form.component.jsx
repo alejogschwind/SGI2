@@ -14,6 +14,7 @@ class ContactForm extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       percentage: null,
       fullName: '',
       relation: '',
@@ -23,9 +24,10 @@ class ContactForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await this.setState({percentage: 1})
+    await this.setState({percentage: 1, loading:true})
     const { userId } = this.props;
     const contactData = {...this.state};
+    delete contactData.loading;
     
     try {
       // await auth.signInWithEmailAndPassword(email, password);
@@ -35,10 +37,11 @@ class ContactForm extends React.Component {
         contact: contactData
       })
       
+      this.setState({loading: false});
       console.log('Updated Contact Data')
       
     } catch(err) {
-      this.setState({percentage: 0})
+      this.setState({percentage: 0, loading: false})
       console.log('Error updating Contact Data.', err);
     }
 
@@ -90,7 +93,10 @@ class ContactForm extends React.Component {
           required
         />
 
-        <CustomButton type='submit'>Guardar contacto de emergencia</CustomButton>
+        <CustomButton
+          type='submit'
+          loading={this.state.loading}
+        >Guardar contacto de emergencia</CustomButton>
       </form>
     </div>
   )}

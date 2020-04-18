@@ -42,7 +42,7 @@ const Header = ({children, currentUser}) => {
         </div>
       </Link>
       <div className='user-info'>
-        <span className='display-name'>{currentUser ? currentUser.displayName : ''}</span>
+        <span className='display-name'>{currentUser ? currentUser.displayName.split(' ')[0] : ''}</span>
         <Link to='/profile'>
           <div
             className="small-avatar"

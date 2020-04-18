@@ -108,4 +108,5 @@ export const signInWithGoogle = async () => {
     console.log('Error trying to create user profile',err)
   }
 }
+
 export default firebase;

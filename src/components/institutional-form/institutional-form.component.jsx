@@ -13,6 +13,7 @@ class InstitutionalForm extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       percentage: null,
       weel: '',
       club: '',
@@ -22,10 +23,11 @@ class InstitutionalForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await this.setState({percentage: 1})
+    this.setState({percentage: 1, loading: true})
     const { userId } = this.props;
     const institutionalData = {...this.state};
-    
+    delete institutionalData.loading;
+
     try {
       // await auth.signInWithEmailAndPassword(email, password);
       console.log(firestore.collection('users').doc(userId))
@@ -34,10 +36,11 @@ class InstitutionalForm extends React.Component {
         institutional: institutionalData
       })
       
+      this.setState({loading: false})
       console.log('Updated Institutional Data')
       
     } catch(err) {
-      this.setState({percentage: 0})
+      this.setState({percentage: 0, loading: false})
       console.log('Error updating Institutional Data.', err);
     }
 
@@ -54,6 +57,7 @@ class InstitutionalForm extends React.Component {
   }
 
   render() {
+    console.log(this.state, this.props);
     return (
     <div className="institutional-form">
       <form onSubmit={this.handleSubmit}>
@@ -99,7 +103,10 @@ class InstitutionalForm extends React.Component {
           required
         />
 
-        <CustomButton type='submit'>Guardar datos institucionales</CustomButton>
+        <CustomButton
+          type='submit'
+          loading={this.state.loading}
+        >Guardar datos institucionales</CustomButton>
       </form>
     </div>
   )}

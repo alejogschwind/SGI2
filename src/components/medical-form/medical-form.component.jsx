@@ -14,6 +14,7 @@ class MedicalForm extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       percentage: null,
       healthInsurance: '',
       affiliateNumber: '',
@@ -36,9 +37,10 @@ class MedicalForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    await this.setState({percentage: 1})
+    await this.setState({percentage: 1, loading: true})
     const { userId } = this.props;
     const medicalData = {...this.state};
+    delete medicalData.loading;
     
     try {
       // await auth.signInWithEmailAndPassword(email, password);
@@ -48,10 +50,11 @@ class MedicalForm extends React.Component {
         medical: medicalData
       })
       
+      this.setState({loading: false})
       console.log('Updated Medical Data')
       
     } catch(err) {
-      this.setState({percentage: 0})
+      this.setState({percentage: 0, loading: false})
       console.log('Error updating medical data.', err);
     }
 
@@ -272,7 +275,10 @@ class MedicalForm extends React.Component {
           value={this.state.obsMedicalData}
         />
 
-        <CustomButton type='submit'>Guardar datos medicos</CustomButton>
+        <CustomButton
+          type='submit'
+          loading={this.state.loading}
+        >Guardar datos medicos</CustomButton>
       </form>
     </div>
   )}

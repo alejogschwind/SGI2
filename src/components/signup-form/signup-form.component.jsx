@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
 import CustomButton from '../custom-button/custom-buton.components';
@@ -13,6 +13,7 @@ class SignUpForm extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       firstname: '',
       lastname: '',
       email: '',
@@ -23,6 +24,7 @@ class SignUpForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
+    this.setState({loading: true})
 
     const { firstname, lastname, email, password, confirmPassword} = this.state;
 
@@ -94,22 +96,19 @@ class SignUpForm extends React.Component {
 
         try {
           await user.sendEmailVerification()
+          this.props.history.push('/email-verify')
           console.log('We send you a email with a link to verify your account.')
         } catch(err) {
+          this.setState({loading: false})
           console.log('Error sending email verification',err)
         }
       } catch(err) {
+        this.setState({loading: false})
         console.log('Error trying to create user profile',err)
       }
-    
-      this.setState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      })
+      
     } catch(err) {
+      this.setState({loading: false})
       console.log('Error creating a user with email and password.', err)
     }
   }
@@ -174,7 +173,10 @@ class SignUpForm extends React.Component {
               handleChange={this.handleChange}
               required
             />
-            <CustomButton type='submit'>Registrate</CustomButton>
+            <CustomButton
+              type='submit'
+              loading={this.state.loading}
+            >Registrate</CustomButton>
           </form>
         </div>
         <span className='signin-link'>Ya estas registrado? <Link to='/signin'>Ingresa aquí</Link></span>
@@ -183,4 +185,4 @@ class SignUpForm extends React.Component {
   }
 } 
 
-export default SignUpForm;
+export default withRouter(SignUpForm);

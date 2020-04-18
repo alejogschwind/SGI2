@@ -12,7 +12,7 @@ const Progressbar = ({ progress}) => {
         width: `${progress * 100}%`
       }
     setStyle(newStyle)
-    }, 1000)
+    }, 500)
     return () => {
       clearTimeout(timer)
     };
@@ -20,6 +20,7 @@ const Progressbar = ({ progress}) => {
 
   return (
     <div className='progressbar'>
+      { progress == 0 && '0 %' }
       <div className='progress-done' style={style}>
         <span>{`${progress * 100} %`}</span>
       </div>
