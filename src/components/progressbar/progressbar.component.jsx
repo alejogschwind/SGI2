@@ -20,10 +20,12 @@ const Progressbar = ({ progress}) => {
 
   return (
     <div className='progressbar'>
-      { progress == 0 && '0 %' }
-      <div className='progress-done' style={style}>
-        <span>{`${progress * 100} %`}</span>
-      </div>
+      { progress == 0 ? (<div className="text">0 %</div>)
+        :
+        (<div className='progress-done' style={style}>
+          <span>{`${progress * 100} %`}</span>
+        </div>)
+      }
     </div>
   )
 }

@@ -1,11 +1,12 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import CustomButton from '../custom-button/custom-buton.components';
 
 import './image-uploader.styles.scss';
 
 import { storage, firestore } from '../../firebase/firebase.utils';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class ImageUploader extends React.Component {
   constructor(props) {
@@ -47,10 +48,10 @@ class ImageUploader extends React.Component {
               photoURL: url
             })
           
-          console.log('Updated profile photo')
-    
+          this.props.addFlashMessage({message: 'Foto de perfil actualizada.', type: 'success'})
+          
         } catch(err) {
-            console.log('Error updating profile photo.', err);
+          this.props.addFlashMessage({message: 'Error actualizando foto de perfil.', type: 'error'})
         }
       }
     )
@@ -70,4 +71,8 @@ class ImageUploader extends React.Component {
 //   userId: state.user.currentUser.id
 // })
 
-export default ImageUploader;
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(null, mapsDispatchToProps)(ImageUploader);

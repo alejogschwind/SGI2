@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
@@ -7,6 +8,7 @@ import {ReactComponent as Logo} from '../../assets/logo.svg';
 import './signup-form.styles.scss';
 
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -29,8 +31,9 @@ class SignUpForm extends React.Component {
     const { firstname, lastname, email, password, confirmPassword} = this.state;
 
     if (password !== confirmPassword) {
-      alert('password don´t match')
-      this.state({
+      this.props.addFlashMessage({type: 'error', message: 'Passwords don´t match.'})
+      this.setState({
+        loading: false,
         password: '',
         confirmPassword: ''
       })
@@ -99,17 +102,20 @@ class SignUpForm extends React.Component {
           this.props.history.push('/email-verify')
           console.log('We send you a email with a link to verify your account.')
         } catch(err) {
+          this.props.addFlashMessage({type: 'error', ...err})
           this.setState({loading: false})
-          console.log('Error sending email verification',err)
+          // console.log('Error sending email verification',err)
         }
       } catch(err) {
+        this.props.addFlashMessage({type: 'error', ...err})
         this.setState({loading: false})
-        console.log('Error trying to create user profile',err)
+        // console.log('Error trying to create user profile',err)
       }
       
     } catch(err) {
+      this.props.addFlashMessage({type: 'error', ...err})
       this.setState({loading: false})
-      console.log('Error creating a user with email and password.', err)
+      // console.log('Error creating a user with email and password.', err)
     }
   }
 
@@ -185,4 +191,12 @@ class SignUpForm extends React.Component {
   }
 } 
 
-export default withRouter(SignUpForm);
+const mapStateToProps = state => ({
+
+})
+
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(null, mapsDispatchToProps)(withRouter(SignUpForm));

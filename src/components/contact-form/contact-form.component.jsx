@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 import SelectInput from '../select-input/select-input.component';
 import CustomButton from '../custom-button/custom-buton.components';
+import FormInput from '../form-input/form-input.compoent';
 
 import './contact-form.styles.scss'
 
 import { firestore } from '../../firebase/firebase.utils';
-import FormInput from '../form-input/form-input.compoent';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class ContactForm extends React.Component {
   constructor(props) {
@@ -38,11 +39,11 @@ class ContactForm extends React.Component {
       })
       
       this.setState({loading: false});
-      console.log('Updated Contact Data')
+      this.props.addFlashMessage({message: 'Contacto de emergencias actualizado.', type: 'success'})
       
     } catch(err) {
       this.setState({percentage: 0, loading: false})
-      console.log('Error updating Contact Data.', err);
+      this.props.addFlashMessage({message: 'Error actualizando contacto de emergencias.', type: 'error'})
     }
 
   }
@@ -106,4 +107,8 @@ const mapStateToProps = state => ({
   userId: state.user.currentUser.id
 })
 
-export default connect(mapStateToProps)(ContactForm);
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(mapStateToProps, mapsDispatchToProps)(ContactForm);

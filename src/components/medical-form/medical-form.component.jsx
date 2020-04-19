@@ -8,6 +8,7 @@ import CustomButton from '../custom-button/custom-buton.components';
 import './medical-form.styles.scss'
 
 import { firestore } from '../../firebase/firebase.utils';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class MedicalForm extends React.Component {
   constructor(props) {
@@ -43,7 +44,6 @@ class MedicalForm extends React.Component {
     delete medicalData.loading;
     
     try {
-      // await auth.signInWithEmailAndPassword(email, password);
       console.log(firestore.collection('users').doc(userId))
       await firestore.collection('users').doc(userId)
       .update({
@@ -51,11 +51,11 @@ class MedicalForm extends React.Component {
       })
       
       this.setState({loading: false})
-      console.log('Updated Medical Data')
+      this.props.addFlashMessage({message: 'Datos Medicos Actualizdos.', type:'success'})
       
     } catch(err) {
       this.setState({percentage: 0, loading: false})
-      console.log('Error updating medical data.', err);
+      this.props.addFlashMessage({message: 'Error actualizando los datos medicos.', type:'error'})
     }
 
   }
@@ -288,4 +288,8 @@ const mapStateToProps = state => ({
   userId: state.user.currentUser.id
 })
 
-export default connect(mapStateToProps)(MedicalForm);
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(mapStateToProps, mapsDispatchToProps)(MedicalForm);

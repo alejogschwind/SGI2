@@ -6,6 +6,7 @@ import ProfileCard from '../../components/profile-card/profile-card.component';
 import ImageUploader from '../../components/image-uploader/image-uploader.component';
 
 import './profile.styles.scss';
+import { addFlashMessage, deleteFlashMessages } from '../../redux/flashmessage/flashmessage.action';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Profile extends React.Component {
   }
   
   componentDidMount() {
+    this.props.deleteFlashMessages();
     const { currentUser } = this.props;
     if (currentUser) {
       this.setState({currentUser: currentUser, loading: false})
@@ -43,4 +45,9 @@ const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message)),
+  deleteFlashMessages: () => dispatch(deleteFlashMessages())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

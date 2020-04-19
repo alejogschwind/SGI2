@@ -4,6 +4,12 @@
   margin: 0 auto;
   background: #d8d8d8;
   border-radius: 20px;
+  text-align: center;
+  .text {
+    height: 30px;
+    line-height: 30px;
+  }
+
   
   .progress-done {
     color: white;

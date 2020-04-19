@@ -7,6 +7,7 @@ import CustomButton from '../custom-button/custom-buton.components';
 import './institutional-form.styles.scss'
 
 import { firestore } from '../../firebase/firebase.utils';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class InstitutionalForm extends React.Component {
   constructor(props) {
@@ -23,25 +24,23 @@ class InstitutionalForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    this.setState({percentage: 1, loading: true})
+    await this.setState({percentage: 1, loading: true})
     const { userId } = this.props;
     const institutionalData = {...this.state};
     delete institutionalData.loading;
 
     try {
-      // await auth.signInWithEmailAndPassword(email, password);
-      console.log(firestore.collection('users').doc(userId))
       await firestore.collection('users').doc(userId)
       .update({
         institutional: institutionalData
       })
       
       this.setState({loading: false})
-      console.log('Updated Institutional Data')
+      this.props.addFlashMessage({message: 'Datos institucionales actualizados.', type: 'success'})
       
     } catch(err) {
       this.setState({percentage: 0, loading: false})
-      console.log('Error updating Institutional Data.', err);
+      this.props.addFlashMessage({message: 'Error actualizando datos institucionales.', type: 'error'})
     }
 
   }
@@ -116,4 +115,8 @@ const mapStateToProps = state => ({
   userId: state.user.currentUser.id
 })
 
-export default connect(mapStateToProps)(InstitutionalForm);
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(mapStateToProps, mapsDispatchToProps)(InstitutionalForm);

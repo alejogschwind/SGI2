@@ -8,6 +8,7 @@ import CustomButton from '../custom-button/custom-buton.components';
 import './personal-form.styles.scss'
 
 import { firestore } from '../../firebase/firebase.utils';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class PersonalForm extends React.Component {
   constructor(props) {
@@ -53,11 +54,12 @@ class PersonalForm extends React.Component {
         })
       
       this.setState({loading: false})
-      console.log('Updated')
+      this.props.addFlashMessage({message: 'Datos personales actualizados.', type: 'success'})
       
     } catch(err) {
       this.setState({loading: false})
-      console.log('Error updating personal data.', err);
+      this.props.addFlashMessage({message: 'Error actualizando los datos personales.', type: 'error'})
+      // console.log('Error updating personal data.', err);
     }
 
   }
@@ -162,4 +164,8 @@ const mapStateToProps = state => ({
   userId: state.user.currentUser.id
 })
 
-export default connect(mapStateToProps)(PersonalForm);
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(mapStateToProps, mapsDispatchToProps)(PersonalForm);

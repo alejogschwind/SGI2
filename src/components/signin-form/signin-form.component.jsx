@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import FormInput from '../form-input/form-input.compoent';
@@ -7,6 +8,7 @@ import {ReactComponent as Logo} from '../../assets/logo.svg';
 import './signin-form.styles.scss'
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
 class SignInForm extends React.Component {
   constructor(props) {
@@ -28,7 +30,8 @@ class SignInForm extends React.Component {
       await this.setState({ email: '', password: ''});
       await this.props.history.push('/profile')
     } catch(err) {
-      console.log('Error signing in with email and password.', err);
+      // console.log('Error signing in with email and password.', err);
+      this.props.addFlashMessage({type: 'error',...err})
       this.setState({ email: '', password: ''})
     }
 
@@ -72,8 +75,12 @@ class SignInForm extends React.Component {
           <CustomButton
             secondary
             onClick={async() => {
-              await signInWithGoogle()
-              await this.props.history.push('/profile')
+              try {
+                await signInWithGoogle()
+                await this.props.history.push('/profile')
+              } catch(err) {
+                this.props.addFlashMessage({type: 'error',...err})
+              }
             }}
           >Ingresar con Google</CustomButton>
         </div>
@@ -83,4 +90,12 @@ class SignInForm extends React.Component {
   }
 } 
 
-export default withRouter(SignInForm);
+const mapStateToProps = state => ({
+
+})
+
+const mapsDispatchToProps = dispatch => ({
+  addFlashMessage: (message) => dispatch(addFlashMessage(message))
+})
+
+export default connect(null, mapsDispatchToProps)(withRouter(SignInForm));

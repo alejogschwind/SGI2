@@ -13,6 +13,7 @@ import InstitutionalData from './pages/institutional-data/institutional-data.com
 import ContactData from './pages/contact-data/contact-data.component';
 import Loading from './components/loading/loading.component';
 import EmailVerify from './pages/email-verify/email-verify.component';
+import FlashmessageList from './components/flashmessage-list/flashmessage-list.component';
 import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
@@ -59,6 +60,7 @@ class App extends React.Component {
     const { loading } = this.state;
     return (
       <div className='app'>
+        <FlashmessageList />
         {
           !loading ?
           <Switch>
@@ -83,7 +85,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+  currentUser: user.currentUser,
 })
 
 const mapDispatchToProps = dispatch => ({

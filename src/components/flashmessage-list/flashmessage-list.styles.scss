@@ -1,0 +1,23 @@
+.flashmessage-list {
+  position: fixed;
+  z-index: 3;
+  // right: -100vw;
+  top: 20px;
+  // right: 20px;
+  // height: 150px;
+  width: 100vw;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  // justify-content:  center;
+  align-items: center;
+  // animation-name: pop;
+  // animation-duration: 2s;
+  // animation-delay: 2s;
+  // animation-direction: alternate;
+
+//   @keyframes pop {
+//     from {right: -100vw;}
+//     to { right: 100vw;}
+//   }
+}

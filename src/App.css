@@ -15,3 +15,13 @@ a {
   height: 100vh;
   width: 100%;
 }
+
+@media (min-width: 769px) {
+  body {
+    background-color: #D81B5D;
+    color: white;
+  }
+  .app {
+    display: none;
+  }
+}
