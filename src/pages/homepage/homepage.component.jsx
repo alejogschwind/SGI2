@@ -8,7 +8,14 @@ import './homepage.styles.scss';
 
 const HomePage = () => (
   <div className="homepage">
-    <CardList />
+    <div>
+      <p style={{
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'center'
+      }}>No hay eventos</p>
+    </div>
+    {/* <CardList /> */}
   </div>
 );
 
