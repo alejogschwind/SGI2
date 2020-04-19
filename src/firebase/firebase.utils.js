@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
+import { addFlashMessage } from '../redux/flashmessage/flashmessage.action';
 
 const config =  {
   apiKey: "AIzaSyCUPIH0VEklGUgmKKuCwJVrVfPWmXfaPs8",
@@ -32,6 +33,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData
       });
     } catch(err) {
+      addFlashMessage({type: 'error', ...err})
       console.log('Error creating user', err.message);
     }
   }

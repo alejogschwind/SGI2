@@ -9,7 +9,7 @@ const EmailVerify = () => (
     <h1 className='title'>Revisa tu correo</h1>
     <EmailVerifyLogo />
     <p className='text'>
-      Te enviamos un correo con un link para verificar tu cuenta.<br /><br />
+      Te enviamos un mail con un link para verificar tu cuenta.<br /><br />
       <span>Regresa al: </span><Link className='link' to='/signin'>Login</Link>
     </p>
   </div>

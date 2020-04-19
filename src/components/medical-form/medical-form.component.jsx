@@ -185,7 +185,9 @@ class MedicalForm extends React.Component {
             options={[
               'Sin Sal',
               'Diabetico',
-              'Sin Gluten'
+              'Sin Gluten',
+              'Vegana',
+              'Vegetariana'
             ]}
             required
           />

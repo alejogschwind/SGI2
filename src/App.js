@@ -14,6 +14,8 @@ import ContactData from './pages/contact-data/contact-data.component';
 import Loading from './components/loading/loading.component';
 import EmailVerify from './pages/email-verify/email-verify.component';
 import FlashmessageList from './components/flashmessage-list/flashmessage-list.component';
+import BuildPage from './pages/buildpage/buildpage.component';
+
 import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
@@ -24,7 +26,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      working: false
     }
   }
   unsubscribeFromAuth = null
@@ -57,27 +60,35 @@ class App extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, working } = this.state;
     return (
       <div className='app'>
-        <FlashmessageList />
         {
-          !loading ?
-          <Switch>
-            <Route exact path='/signin' component={SignIn} />
-            <Route exact path='/signup' component={SignUp} />
-            <Route exact path='/email-verify' component={EmailVerify} />
-            <Layout>
-              <Route exact path='/' component={requiredAuth(HomePage)} />
-              <Route exact path='/profile' component={requiredAuth(Profile)} />
-              <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
-              <Route exact path='/profile/medical' component={requiredAuth(MedicalData)} />
-              <Route exact path='/profile/institutional' component={requiredAuth(InstitutionalData)} />
-              <Route exact path='/profile/contact' component={requiredAuth(ContactData)} />
-            </Layout>
-          </Switch>
+          working ? (<BuildPage />)
           :
-          <Loading />
+          (
+            <>
+              <FlashmessageList />
+              {
+                !loading ?
+                <Switch>
+                  <Route exact path='/signin' component={SignIn} />
+                  <Route exact path='/signup' component={SignUp} />
+                  <Route exact path='/email-verify' component={EmailVerify} />
+                  <Layout>
+                    <Route exact path='/' component={requiredAuth(HomePage)} />
+                    <Route exact path='/profile' component={requiredAuth(Profile)} />
+                    <Route exact path='/profile/personal' component={requiredAuth(PersonalData)} />
+                    <Route exact path='/profile/medical' component={requiredAuth(MedicalData)} />
+                    <Route exact path='/profile/institutional' component={requiredAuth(InstitutionalData)} />
+                    <Route exact path='/profile/contact' component={requiredAuth(ContactData)} />
+                  </Layout>
+                </Switch>
+                :
+                <Loading />
+              }
+            </>
+          )
         }
       </div>
     );

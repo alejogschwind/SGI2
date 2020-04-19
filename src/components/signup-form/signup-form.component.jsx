@@ -43,6 +43,8 @@ class SignUpForm extends React.Component {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password)
       const displayName = `${firstname} ${lastname}`
+      console.log(user);
+      user.updateProfile({displayName: displayName})
 
       try {
         await createUserProfileDocument(user,{

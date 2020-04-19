@@ -6,6 +6,7 @@ import CustomButton from '../custom-button/custom-buton.components';
 
 import './institutional-form.styles.scss'
 
+import clubData from './clubsData';
 import { firestore } from '../../firebase/firebase.utils';
 import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
 
@@ -81,9 +82,14 @@ class InstitutionalForm extends React.Component {
           handleChange={this.handleChange}
           value={this.state.district}
           options={[
+            'Otro',
+            '4845',
+            '4851',
+            '4895',
+            '4905',
             '4921',
-            '4920',
-            '4930'
+            '4945',
+            '4875',
           ]}
           required
         />
@@ -94,11 +100,7 @@ class InstitutionalForm extends React.Component {
           placeholder='Seleccione su club...'
           handleChange={this.handleChange}
           value={this.state.club}
-          options={[
-            'Rotaract Club Tandil',
-            'Rotaract Club Olavarria',
-            'Rotaract Club Santiago del Estero'
-          ]}
+          options={clubData}
           required
         />
 

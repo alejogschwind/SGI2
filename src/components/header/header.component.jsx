@@ -73,4 +73,4 @@ const mapStateToProps = state => ({
   currentUser: state.user.currentUser
 })
 
-export default connect(mapStateToProps)(withLoading(Header));
+export default withLoading(connect(mapStateToProps)(Header));

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { auth } from './firebase/firebase.utils';
 
 
 export default function(ComposedComponent) {
@@ -21,10 +20,8 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    console.log(state.user)
     return {
       isAuth: !!(state.user.currentUser),
-      // userId: state.user.currentUser.id
     }
   }
 
