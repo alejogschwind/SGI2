@@ -77,7 +77,6 @@ class SignInForm extends React.Component {
             onClick={async() => {
               try {
                 await signInWithGoogle()
-                await this.props.history.push('/profile')
               } catch(err) {
                 this.props.addFlashMessage({type: 'error',...err})
               }
