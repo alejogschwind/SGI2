@@ -23,7 +23,7 @@ const ProfileCard = ({ currentUser, history }) => {
   return (
   <div className="profile-card">
     <Modal ref={modalRef}>
-        <ImageUploader userId={currentUser.id}/>
+        <ImageUploader userId={currentUser ? currentUser.id : ''}/>
     </Modal>
     <div className="data-container">
       <Avatar
@@ -47,9 +47,9 @@ const ProfileCard = ({ currentUser, history }) => {
         <ProfileButton text="Contacto de Emergencias" icon={<ContactIcon />}/>
       </Link>
       {/* <ProfileButton text="Info" icon={<InfoIcon />}/> */}
-      <div onClick={() => {
-        auth.signOut()
-        history.push('/signin')
+      <div onClick={async () => {
+        await auth.signOut()
+        await history.push('/signin')
       }}>
         <ProfileButton
           text="Cerrar sesión"

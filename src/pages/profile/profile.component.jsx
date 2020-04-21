@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ProfileCard from '../../components/profile-card/profile-card.component';
 import ImageUploader from '../../components/image-uploader/image-uploader.component';
-
+import withLoading from '../../HOCs/withLoading';
 import './profile.styles.scss';
 import { addFlashMessage, deleteFlashMessages } from '../../redux/flashmessage/flashmessage.action';
 
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
   deleteFlashMessages: () => dispatch(deleteFlashMessages())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default  withLoading(connect(mapStateToProps, mapDispatchToProps)(Profile));
