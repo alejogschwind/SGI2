@@ -57,7 +57,6 @@ class InstitutionalForm extends React.Component {
   }
 
   render() {
-    console.log(this.state, this.props);
     return (
     <div className="institutional-form">
       <form onSubmit={this.handleSubmit}>

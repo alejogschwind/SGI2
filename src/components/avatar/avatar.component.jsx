@@ -4,7 +4,8 @@ import {ReactComponent as EditIcon} from './assets/edit.svg';
 
 import './avatar.styles.scss';
 
-const Avatar = ({avatar}) => (
+const Avatar = ({avatar, modalRef}) => {
+  return (
   <div
     className='avatar'
     style={{
@@ -22,13 +23,14 @@ const Avatar = ({avatar}) => (
     <div
       className='edit-btn'
       onClick={() => {
-        
+        console.log(modalRef)
+        modalRef.current.openModal()
       }}
     >
       {/* <input type="file" name='photoURL' /> */}
       <EditIcon />
     </div>
   </div>
-);
+)};
 
 export default Avatar;

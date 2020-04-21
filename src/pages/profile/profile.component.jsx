@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Header from '../../components/header/header.component';
 import ProfileCard from '../../components/profile-card/profile-card.component';
 import ImageUploader from '../../components/image-uploader/image-uploader.component';
 
@@ -31,11 +30,11 @@ class Profile extends React.Component {
     return (
       <div className="profile">
         <ProfileCard history={this.props.history}/>
-        { !loading ?
+        {/* { !loading ?
             <ImageUploader userId={this.state.currentUser.id}/>
           :
             ''
-        }
+        } */}
       </div>
     );
   }

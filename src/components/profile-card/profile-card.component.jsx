@@ -11,14 +11,25 @@ import {ReactComponent as InstitutionalIcon} from './assets/institutional.svg';
 import {ReactComponent as ContactIcon} from './assets/contact.svg';
 import {ReactComponent as InfoIcon} from './assets/info.svg';
 import {ReactComponent as LogoutIcon} from './assets/logout.svg';
+import Modal from '../modal/modal.component';
+import ImageUploader from './../image-uploader/image-uploader.component';
 
 import './profile-card.styles.scss';
 import { auth } from '../../firebase/firebase.utils';
 
-const ProfileCard = ({ currentUser, history }) => (
+const ProfileCard = ({ currentUser, history }) => {
+  const modalRef = React.useRef();
+
+  return (
   <div className="profile-card">
+    <Modal ref={modalRef}>
+        <ImageUploader userId={currentUser.id}/>
+    </Modal>
     <div className="data-container">
-      <Avatar avatar={currentUser ? currentUser.photoURL : ''}/>
+      <Avatar
+        modalRef={modalRef}
+        avatar={currentUser ? currentUser.photoURL : ''}
+      />
       <h3 className="name">{currentUser ? currentUser.displayName : ''}</h3>
       <span className="email">{currentUser ? currentUser.email : ''}</span>
     </div>
@@ -47,7 +58,7 @@ const ProfileCard = ({ currentUser, history }) => (
       </div>
     </div>
   </div>
-);
+)};
 
 const mapDispatchToProps = state => ({
   currentUser: state.user.currentUser

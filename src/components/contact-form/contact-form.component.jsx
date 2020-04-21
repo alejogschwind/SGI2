@@ -32,7 +32,6 @@ class ContactForm extends React.Component {
     
     try {
       // await auth.signInWithEmailAndPassword(email, password);
-      console.log(firestore.collection('users').doc(userId))
       await firestore.collection('users').doc(userId)
       .update({
         contact: contactData
@@ -72,7 +71,7 @@ class ContactForm extends React.Component {
         />
         
         <SelectInput
-          label='Relacion con su contacto de emergencia'
+          label='Relación con su contacto de emergencias'
           name='relation'
           placeholder='Seleccione una opción...'
           handleChange={this.handleChange}
@@ -80,13 +79,14 @@ class ContactForm extends React.Component {
           options={[
             'Madre',
             'Padre',
-            'Tutor'
+            'Tutor',
+            'Otra'
           ]}
           required
         />
         
         <FormInput
-          label='Telefono'
+          label='Teléfono'
           name='phone'
           placeholder='Ej: +5492284232823'
           handleChange={this.handleChange}

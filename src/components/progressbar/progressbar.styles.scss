@@ -1,5 +1,5 @@
 .progressbar {
-  width: 90vw;
+  width: 100%;
   height: 30px;
   margin: 0 auto;
   background: #d8d8d8;
@@ -21,6 +21,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 1s ease-in 0.5s;
+    transition: 0.5s ease-in 0.5s;
   }
 }

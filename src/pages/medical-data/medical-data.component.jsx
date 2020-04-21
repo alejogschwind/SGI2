@@ -32,7 +32,7 @@ class MedicalData extends React.Component {
       <div className='medical-data'>
         <FormWrapper>
           {
-            !loading ?   
+            !loading ?
               <>
                 <div className='progressbar-wrapper'>
                   <h5>Datos completos al:</h5>

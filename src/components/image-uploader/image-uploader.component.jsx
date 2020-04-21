@@ -7,6 +7,7 @@ import './image-uploader.styles.scss';
 
 import { storage, firestore } from '../../firebase/firebase.utils';
 import { addFlashMessage } from '../../redux/flashmessage/flashmessage.action';
+import Progressbar from '../progressbar/progressbar.component';
 
 class ImageUploader extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class ImageUploader extends React.Component {
 
     this.state = {
       image: null,
+      progress: 0
     }
     this.handelUpload = this.handelUpload.bind(this);
   }
@@ -33,7 +35,8 @@ class ImageUploader extends React.Component {
     
     uploadTask.on('state_changed',
       (snapshot) => {
-        // progress func
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes));
+        this.setState({progress: progress})
       },
       (err) => {
         console.log(err)
@@ -60,7 +63,8 @@ class ImageUploader extends React.Component {
   render() {
     return (
       <div className='image-uploader'>
-        <input type='file' onChange={this.handelChange}/>
+        {/* <Progressbar progress={this.state.progress}/> */}
+        <input type='file' className="select-image" onChange={this.handelChange}/>
         <CustomButton onClick={this.handelUpload}>Guardar Imagen</CustomButton>
       </div>
     )
