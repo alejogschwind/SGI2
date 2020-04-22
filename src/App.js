@@ -20,6 +20,9 @@ import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
 import requiredAuth from './routerProtector';
+import { firestore } from './firebase/firebase.utils';
+import eventReducer from './redux/event/event.reducer';
+import { setEvents } from './redux/event/event.actions';
 
 class App extends React.Component {
   constructor(props) {
@@ -46,9 +49,18 @@ class App extends React.Component {
             })
         });
 
+        // Load Events
+        let events = [];
+        const eventsSnapshot = await firestore.collection('events').where('public', '==', true).get();
+        await eventsSnapshot.docs.forEach((doc) => {
+          events.push(doc.data())
+        })
+        this.props.setEvents(events)
+
       } else {
         await setCurrentUser(userAuth)
       }
+
       setTimeout(async() => {
         await this.setState({loading: false})
       }, 1000)
@@ -100,7 +112,8 @@ const mapStateToProps = ({user}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  setEvents: events => dispatch(setEvents(events))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

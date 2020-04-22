@@ -17,15 +17,13 @@ class VirtualCardEvent extends React.Component {
     return (
       <div className="virtual-card-event">
         <div className="image-wrapper">
-          {/* <img src="" alt=""/> */}
-          <div className="image">
-          </div>
+          <img src={this.props.imageURL} className="image" alt={this.props.name}/>
         </div>
         <div className="box-data-list">
           <DataBox lable={"Fecha:"}>26 de marzo</DataBox>
           <DataBox lable={"Hora:"}>17hs</DataBox>
-          <DataBox lable={"Cupos:"}>{<InfinityIcon />}</DataBox>
-          <DataBox lable={"Medio:"}>Zoom</DataBox>
+          <DataBox lable={"Cupos:"}>{this.props.withLimit ? this.props.limit : <InfinityIcon />}</DataBox>
+          <DataBox lable={"Medio:"}>{this.props.plataform}</DataBox>
         </div>
         <div className="button-wrapper">
           <CustomButton>Inscribirse</CustomButton>
