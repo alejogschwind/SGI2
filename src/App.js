@@ -53,7 +53,7 @@ class App extends React.Component {
         let events = [];
         const eventsSnapshot = await firestore.collection('events').where('public', '==', true).get();
         await eventsSnapshot.docs.forEach((doc) => {
-          events.push(doc.data())
+          events.push({id: doc.id ,...doc.data()})
         })
         this.props.setEvents(events)
 

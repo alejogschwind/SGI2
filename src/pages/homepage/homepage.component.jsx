@@ -30,7 +30,8 @@ class HomePage extends React.Component {
           !this.state.loading ? 
             this.props.events.map(event => 
               <VirtualCardEvent
-                key={event.name}
+                key={event.id}
+                id={event.id}
                 name={event.name}
                 imageURL={event.image}
                 withLimit={event.withLimit}
