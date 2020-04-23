@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const cors = require('cors')({origin: true});
 admin.initializeApp(functions.config().firebase);
 
 // Create and Deploy Your First Cloud Functions
@@ -40,3 +41,33 @@ exports.inscriptionCreated = functions.firestore
     return updateInscription(inscription, context.params)
 
 })
+
+const updateProfilePercentage = async (profileComplete, userId) => {
+  return await admin.firestore().doc(`users/${userId}`)
+    .set({
+      stats: {
+        profileComplete: profileComplete
+      }
+    }, {merge: true})
+}
+
+exports.profileUpdated = functions.firestore
+  .document('users/{userId}')
+  .onUpdate(async (change, context) => {
+    const user = change.after.data()
+    const profileComplete = (user.contact.percentage + user.institutional.percentage + user.medical.percentage + user.personal.percentage) / 4
+    const userId = context.params.userId;
+    return updateProfilePercentage(profileComplete, userId)
+  })
+
+// Update all the documents
+  // const querySnapShot = await admin.firestore().collection('users').get();
+    
+  //   await querySnapShot.forEach(doc => {
+  //     const user = doc.data()
+  //     const profileComplete = (user.contact.percentage + user.institutional.percentage + user.medical.percentage + user.personal.percentage) / 4
+  //     const userId = doc.id;
+  //     updateProfilePercentage(profileComplete, userId)
+  //   })
+    
+  //   return {}

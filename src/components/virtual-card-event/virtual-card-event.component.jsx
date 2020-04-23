@@ -24,6 +24,8 @@ class VirtualCardEvent extends React.Component {
     // If user allready inscript return
     if (this.state.userIsInscript) return
 
+    if (this.props.profileComplete !== 1) return this.props.addFlashMessage({message: 'No tienes tu perfil completo.', type: 'error'})
+
     const inscriptionsSnapshot = await firestore.collection(`events/${this.props.id}/inscriptions`)
     const userRef = await firestore.doc(`users/${this.props.userId}`)
     await inscriptionsSnapshot.add({
@@ -72,7 +74,8 @@ class VirtualCardEvent extends React.Component {
 } 
 
 const mapStateToProps = state => ({
-  userId: state.user.currentUser.id
+  userId: state.user.currentUser.id,
+  profileComplete: state.user.currentUser.stats.profileComplete
 });
 
 const mapDispatchToProps = dispatch => ({

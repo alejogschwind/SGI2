@@ -52,7 +52,7 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = async () => {
   const { user } = await auth.signInWithPopup(provider);
-  const { displayName, photoURL } = user;
+  const { displayName, photoURL } = await user;
   try {
     await createUserProfileDocument(user,{
       displayName: displayName,
@@ -107,7 +107,7 @@ export const signInWithGoogle = async () => {
     })
 
   } catch(err) {
-    console.log('Error trying to create user profile',err)
+    addFlashMessage({type: 'error', ...err})
   }
 }
 
