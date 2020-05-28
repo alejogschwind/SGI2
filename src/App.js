@@ -16,6 +16,11 @@ import EmailVerify from './pages/email-verify/email-verify.component';
 import FlashmessageList from './components/flashmessage-list/flashmessage-list.component';
 import BuildPage from './pages/buildpage/buildpage.component';
 
+// import { Main as MainLayout, Minimal as MinimalLayout } from './admin/src/layouts';
+import {
+  Dashboard as DashboardView,
+} from './views';
+
 import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.action';
@@ -87,6 +92,8 @@ class App extends React.Component {
                   <Route exact path='/signin' component={SignIn} />
                   <Route exact path='/signup' component={SignUp} />
                   <Route exact path='/email-verify' component={EmailVerify} />
+                  // Admin Dashboard
+                  <Route exact path='/admin' component={requiredAuth(DashboardView)} />
                   <Layout>
                     <Route exact path='/' component={requiredAuth(HomePage)} />
                     <Route exact path='/profile' component={requiredAuth(Profile)} />
@@ -94,6 +101,7 @@ class App extends React.Component {
                     <Route exact path='/profile/medical' component={requiredAuth(MedicalData)} />
                     <Route exact path='/profile/institutional' component={requiredAuth(InstitutionalData)} />
                     <Route exact path='/profile/contact' component={requiredAuth(ContactData)} />
+
                   </Layout>
                 </Switch>
                 :

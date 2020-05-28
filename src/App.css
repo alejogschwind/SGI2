@@ -16,7 +16,7 @@ a {
   width: 100%;
 }
 
-@media (min-width: 769px) {
+/* @media (min-width: 769px) {
   body {
     background-color: #D81B5D;
     color: white;
@@ -24,4 +24,4 @@ a {
   .app {
     display: none;
   }
-}
+} */
